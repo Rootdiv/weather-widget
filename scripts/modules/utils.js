@@ -1,19 +1,21 @@
 export const getCurrentDateTime = () => {
-  const months = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
-  const weekdays = ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'];
-
   const date = new Date();
 
-  const dayOfMonth = date.getDate();
-  const month = months[date.getMonth()];
-  const year = date.getFullYear();
-  const dayOfWeek = weekdays[date.getDay()];
+  const formatDate = new Intl.DateTimeFormat('ru-RU', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  }).format(date);
+  const currentDate = formatDate.replace('.', '').replace(' г.', '');
 
-  let hours = date.getHours();
-  let minutes = date.getMinutes();
+  const time = new Intl.DateTimeFormat('ru-RU', {
+    hour: '2-digit',
+    minute: '2-digit',
+  }).format(date);
 
-  hours = hours < 10 ? `0${hours}` : hours;
-  minutes = minutes < 10 ? `0${minutes}` : minutes;
+  const week = new Intl.DateTimeFormat('ru-RU', {
+    weekday: 'long',
+  }).format(date);
 
-  return { dayOfMonth, month, year, hours, minutes, dayOfWeek };
+  return { currentDate, time, week };
 };
