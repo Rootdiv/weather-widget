@@ -13,6 +13,11 @@
   border-radius: 12px;
 }
 
+.widget_error {
+  border: 2px solid #ff0000;
+  min-height: 50px;
+}
+
 .widget * {
   box-sizing: inherit;
 }
@@ -71,18 +76,19 @@
   width: 80px;
 }
 
-.widget__wheather {
+.widget__whether {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .widget__city {
-  padding-left: 25px;
+  padding-left: 10%;
   font-size: 14px;
   display: flex;
   gap: 5px;
   align-items: center;
+  justify-content: center;
 }
 
 .widget__change-city {
