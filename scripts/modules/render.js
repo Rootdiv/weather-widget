@@ -3,6 +3,12 @@ import { getCurrentDateTime } from './utils.js';
 export const renderWidgetToday = (widget, data) => {
   const { currentDate, time, week } = getCurrentDateTime();
 
+  const {
+    name,
+    weather: [{ icon }],
+    main: { temp, feels_like: feelsLike },
+  } = data;
+
   widget.insertAdjacentHTML(
     'beforeend',
     `<div class="widget__today">
@@ -12,38 +18,43 @@ export const renderWidgetToday = (widget, data) => {
         <p class="widget__day">${week}</p>
       </div>
       <div class="widget__icon">
-        <img class="widget__img" src="./icon/${data.weather[0].icon}.svg" alt="Погода" />
+        <img class="widget__img" src="./icon/${icon}.svg" alt="Погода" />
       </div>
       <div class="widget__weather">
         <div class="widget__city">
-          <p>${data.name}</p>
+          <p>${name}</p>
           <button class="widget__change-city" aria-label="Изменить город"></button>
         </div>
-        <p class="widget__temp-big">${data.main.temp}°C</p>
+        <p class="widget__temp-big">${temp}°C</p>
         <p class="widget__felt">ощущается</p>
-        <p class="widget__temp-small">${data.main.feels_like}°C</p>
+        <p class="widget__temp-small">${feelsLike}°C</p>
       </div>
     </div>`,
   );
 };
 
 export const renderWidgetOther = (widget, data) => {
+  const {
+    wind: { speed },
+    main: { humidity, pressure },
+  } = data;
+
   widget.insertAdjacentHTML(
     'beforeend',
     `<div class="widget__other">
       <div class="widget__wind">
         <p class="widget__wind-title">Ветер</p>
-        <p class="widget__wind-speed">${data.wind.speed} м/с</p>
+        <p class="widget__wind-speed">${speed} м/с</p>
         <p class="widget__wind-text">&#8599;</p>
       </div>
       <div class="widget__humidity">
         <p class="widget__humidity-title">Влажность</p>
-        <p class="widget__humidity-value">${data.main.humidity}%</p>
+        <p class="widget__humidity-value">${humidity}%</p>
         <p class="widget__humidity-text">Т.Р: -0.2 °C</p>
       </div>
       <div class="widget__pressure">
         <p class="widget__pressure-title">Давление</p>
-        <p class="widget__pressure-value">${(data.main.pressure * 0.75).toFixed(2)}</p>
+        <p class="widget__pressure-value">${(pressure * 0.75).toFixed(2)}</p>
         <p class="widget__pressure-text">мм рт.ст.</p>
       </div>
     </div>`,
