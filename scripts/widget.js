@@ -1,7 +1,8 @@
 import { startWidget } from './modules/widgetService.js';
 
-const initWidget = async app => {
-  const widget = await startWidget();
+export const initWidget = async (app, city = 'Москва') => {
+  app.textContent = '';
+  const widget = await startWidget(city);
   app.append(widget);
 };
 

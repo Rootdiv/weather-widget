@@ -1,12 +1,11 @@
-import { fetchWeather } from './APIService.js';
+import { fetchWeather, fetchForecast } from './APIService.js';
 import { renderWidgetToday, renderWidgetOther, renderWidgetForecast, showError } from './render.js';
 
-export const startWidget = async () => {
+export const startWidget = async city => {
   const widget = document.createElement('div');
   widget.className = 'widget';
 
-  const dataWeather = await fetchWeather('Москва');
-  console.log('dataWeather: ', dataWeather);
+  const dataWeather = await fetchWeather(city);
 
   if (dataWeather.success) {
     renderWidgetToday(widget, dataWeather.data);
@@ -14,7 +13,14 @@ export const startWidget = async () => {
   } else {
     showError(widget, dataWeather.error);
   }
-  renderWidgetForecast(widget);
+
+  const dataForecast = await fetchForecast(city);
+
+  if (dataForecast.success) {
+    renderWidgetForecast(widget, dataForecast.data);
+  } else {
+    showError(widget, dataForecast.error);
+  }
 
   return widget;
 };

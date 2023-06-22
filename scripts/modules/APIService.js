@@ -13,3 +13,16 @@ export const fetchWeather = async city => {
     return { success: false, error };
   }
 };
+
+export const fetchForecast = async city => {
+  try {
+    const response = await fetch(`${API_URL}forecast?q=${city}&appid=${API_KEY}&units=metric&lang=ru`);
+    if (!response.ok || response.status === 404) {
+      throw Error('Ошибка запроса');
+    }
+    const data = await response.json();
+    return { success: true, data };
+  } catch (error) {
+    return { success: false, error };
+  }
+};
