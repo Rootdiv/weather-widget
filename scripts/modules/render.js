@@ -1,22 +1,4 @@
-import { calculateDewPoint, changeCity, convertPressure, getCurrentDateTime, getWeatherForecastData } from './utils.js';
-
-export const renderWidgetForm = widget => {
-  const form = document.createElement('form');
-  form.className = 'widget__form';
-  const input = document.createElement('input');
-  input.className = 'widget__input';
-  input.type = 'text';
-  form.append(input);
-
-  form.addEventListener('submit', event => {
-    event.preventDefault();
-    changeCity(input.value);
-    form.remove();
-  });
-
-  widget.append(form);
-  input.focus();
-};
+import { calculateDewPoint, convertPressure, getCurrentDateTime, getWeatherForecastData } from './utils.js';
 
 export const renderWidgetToday = (widget, data) => {
   const { currentDate, time, week } = getCurrentDateTime();
@@ -49,11 +31,6 @@ export const renderWidgetToday = (widget, data) => {
       </div>
     </div>`,
   );
-
-  const btn = widget.querySelector('.widget__change-city');
-  btn.addEventListener('click', () => {
-    renderWidgetForm(widget);
-  });
 };
 
 export const renderWidgetOther = (widget, data) => {

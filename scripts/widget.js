@@ -1,9 +1,11 @@
+import { cityServiceSearch } from './modules/cityServiceSearch.js';
 import { startWidget } from './modules/widgetService.js';
 
-export const initWidget = async (app, city = 'Москва') => {
-  app.textContent = '';
-  const widget = await startWidget(city);
+export const initWidget = async app => {
+  const widget = await startWidget();
   app.append(widget);
+
+  cityServiceSearch(widget);
 };
 
 const app = document.querySelector('#app');

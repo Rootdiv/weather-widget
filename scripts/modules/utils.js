@@ -1,5 +1,3 @@
-import { initWidget } from '../widget.js';
-
 export const getCurrentDateTime = () => {
   const date = new Date();
 
@@ -73,10 +71,4 @@ export const getWeatherForecastData = data => {
   });
 
   return forecastData;
-};
-
-export const changeCity = value => {
-  const app = document.querySelector('#app');
-
-  initWidget(app, value);
 };
