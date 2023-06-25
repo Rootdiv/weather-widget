@@ -1,5 +1,5 @@
-export const getCurrentDateTime = () => {
-  const date = new Date();
+export const getCurrentDateTime = timezone => {
+  const date = new Date(Date.now() + new Date().getTimezoneOffset() * 60000 + timezone * 1000);
 
   const formatDate = new Intl.DateTimeFormat('ru-RU', {
     day: 'numeric',

@@ -1,13 +1,14 @@
 import { calculateDewPoint, convertPressure, getCurrentDateTime, getWeatherForecastData } from './utils.js';
 
 export const renderWidgetToday = (widget, data) => {
-  const { currentDate, time, week } = getCurrentDateTime();
-
   const {
     name,
     weather: [{ icon }],
     main: { temp, feels_like: feelsLike },
+    timezone,
   } = data;
+
+  const { currentDate, time, week } = getCurrentDateTime(timezone);
 
   widget.insertAdjacentHTML(
     'beforeend',
